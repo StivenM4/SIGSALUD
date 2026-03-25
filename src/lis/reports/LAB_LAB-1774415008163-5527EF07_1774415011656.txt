@@ -1,0 +1,37 @@
+────────────────────────────────────────────────────────────
+         SIGSALUD - REPORTE DE LABORATORIO
+────────────────────────────────────────────────────────────
+
+Fecha de reporte  : 25/3/2026, 12:03:31 a. m.
+Orden / Código    : LAB-1774415008163-5527EF07
+Paciente          : Juan Perez Test
+Médico solicitante: Dr. House
+Prioridad         : URGENTE
+
+────────────────────────────────────────────────────────────
+MUESTRA
+────────────────────────────────────────────────────────────
+Tipo              : Sangre Venosa
+Técnico           : Tec. Mariana
+Recolección       : 2026-03-25 05:03:31
+
+────────────────────────────────────────────────────────────
+RESULTADOS
+────────────────────────────────────────────────────────────
+ANÁLISIS                         RESULTADO      UNIDAD
+
+  Hemoglobina                    14.2         
+  Leucocitos                     31.5         
+  Creatinina                     0.9          
+
+
+✅ Validado por   : Bact. Laura G.  (2026-03-25 05:03:31)
+
+────────────────────────────────────────────────────────────
+⚠️  VALORES CRÍTICOS DETECTADOS
+────────────────────────────────────────────────────────────
+  Leucocitos: 31.5 x10³/µL → POR_ENCIMA_MAXIMO_CRITICO
+
+────────────────────────────────────────────────────────────
+SIGSALUD - Sistema Hospitalario Interoperable | Licencia MIT
+────────────────────────────────────────────────────────────

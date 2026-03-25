@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.sqlite
+db/
+test_out.txt
+.DS_Store

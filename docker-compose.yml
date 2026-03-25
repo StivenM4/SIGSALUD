@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  orthanc:
+    image: orthancteam/orthanc
+    container_name: sigsalud_orthanc
+    ports:
+      - "8042:8042" # HTTP interface
+      - "4242:4242" # DICOM interface
+    environment:
+      - ORTHANC_NAME=SIGSALUD PACS
+      - WADO_URI_ENABLED=true
+    volumes:
+      - orthanc_data:/var/lib/orthanc/db
+
+volumes:
+  orthanc_data:

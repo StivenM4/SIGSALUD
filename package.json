@@ -1,0 +1,25 @@
+{
+  "name": "sigsalud",
+  "version": "1.0.0",
+  "description": "Plataforma Hospitalaria SIGSALUD",
+  "main": "src/his/app.js",
+  "scripts": {
+    "start:his": "node src/his/app.js",
+    "start:lis": "node src/lis/app.js",
+    "start:ris": "node src/ris/app.js",
+    "dev:his": "nodemon src/his/app.js",
+    "dev:lis": "nodemon src/lis/app.js",
+    "dev:ris": "nodemon src/ris/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
