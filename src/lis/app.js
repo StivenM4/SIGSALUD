@@ -48,8 +48,8 @@ app.use((err, _req, res, _next) => {
 
 // ── Iniciar servidor ──────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => {
-  console.log(`[LIS] Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[LIS] Servidor corriendo en http://0.0.0.0:${PORT}`);
 });
 
 module.exports = app;

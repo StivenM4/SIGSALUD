@@ -18,7 +18,7 @@ router.use(authenticate);
 
 // ── Historial Clínico ─────────────────────────────────────────────────────────
 router.post('/records',
-  requireRole('MEDICO'),
+  requireRole('MEDICO', 'ADMINISTRADOR'),
   ClinicalController.createRecord);
 
 router.get('/records/patient/:patient_id',
@@ -27,11 +27,11 @@ router.get('/records/patient/:patient_id',
 
 // ── Órdenes Diagnósticas ──────────────────────────────────────────────────────
 router.post('/orders/lab',
-  requireRole('MEDICO'),
+  requireRole('MEDICO', 'ADMINISTRADOR'),
   ClinicalController.createLabOrder);
 
 router.post('/orders/radiology',
-  requireRole('MEDICO'),
+  requireRole('MEDICO', 'ADMINISTRADOR'),
   ClinicalController.createRadiologyOrder);
 
 router.get('/orders/status/:patient_id',

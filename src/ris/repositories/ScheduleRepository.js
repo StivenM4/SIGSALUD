@@ -1,15 +1,12 @@
 /**
  * @file ScheduleRepository.js  (RIS)
- * @description Repositorio de agendamiento de salas/equipos (HU38, HU39).
- * SRP: sólo gestiona CRUD sobre `schedules`.
+ * @description Repositorio de agendamiento de estudios (HU38, HU39).
  */
 const { getDb } = require('../config/db');
 
 class ScheduleRepository {
   /**
-   * Crea una nueva programación de estudio.
-   * @param {{ order_id, room, equipment, technician, scheduled_at, duration_minutes }} data
-   * @returns {Promise<number>}
+   * Crea una cita para un estudio (HU38).
    */
   create({ order_id, room, equipment, technician, scheduled_at, duration_minutes }) {
     return new Promise((resolve, reject) => {
@@ -17,76 +14,51 @@ class ScheduleRepository {
       db.run(
         `INSERT INTO schedules (order_id, room, equipment, technician, scheduled_at, duration_minutes)
          VALUES (?, ?, ?, ?, ?, ?)`,
-        [order_id, room, equipment || null, technician, scheduled_at, duration_minutes || 30],
+        [order_id, room, equipment, technician, scheduled_at, duration_minutes],
         function (err) { err ? reject(err) : resolve(this.lastID); }
       );
     });
   }
 
   /**
-   * Verifica conflicto de sala en el horario exacto (HU39).
-   * Considera la duración de los estudios existentes.
-   * @param {string} room
-   * @param {string} scheduled_at
-   * @param {number} [duration_minutes=30]
-   * @returns {Promise<boolean>}
+   * Verifica conflictos de horario en una sala (HU39).
    */
-  hasConflict(room, scheduled_at, duration_minutes = 30) {
+  hasConflict(room, scheduled_at, duration_minutes) {
     return new Promise((resolve, reject) => {
       const db = getDb();
-      // Verifica solapamiento temporal: el nuevo [start, start+dur] se solapa con algún existente
+      // Simplificado: verifica si hay alguna cita en la misma sala que se traslape
       db.get(
-        `SELECT id FROM schedules
-         WHERE room = ?
-           AND status != 'CANCELADA'
-           AND datetime(scheduled_at) < datetime(?, '+${duration_minutes} minutes')
-           AND datetime(scheduled_at, '+' || duration_minutes || ' minutes') > datetime(?)`,
-        [room, scheduled_at, scheduled_at],
+        `SELECT id FROM schedules 
+         WHERE room = ? 
+         AND (
+           (scheduled_at <= ? AND datetime(scheduled_at, '+' || duration_minutes || ' minutes') > ?)
+           OR
+           (? <= scheduled_at AND datetime(?, '+' || ? || ' minutes') > scheduled_at)
+         ) LIMIT 1`,
+        [room, scheduled_at, scheduled_at, scheduled_at, scheduled_at, duration_minutes],
         (err, row) => (err ? reject(err) : resolve(!!row))
       );
     });
   }
 
-  /** @returns {Promise<Object|null>} */
-  findByOrder(order_id) {
-    return new Promise((resolve, reject) => {
-      const db = getDb();
-      db.get(`SELECT * FROM schedules WHERE order_id = ?`, [order_id], (err, row) => (err ? reject(err) : resolve(row || null)));
-    });
-  }
-
   /**
-   * Lista la agenda del día/sala.
-   * @param {string} [room]
-   * @param {string} [date] - Fecha en formato YYYY-MM-DD
-   * @returns {Promise<Object[]>}
+   * Obtiene la agenda de una sala en un día.
    */
   findByRoomAndDate(room, date) {
     return new Promise((resolve, reject) => {
       const db = getDb();
-      const conditions = [];
-      const params     = [];
-      if (room) { conditions.push(`room = ?`);                   params.push(room); }
-      if (date) { conditions.push(`date(scheduled_at) = date(?)`); params.push(date); }
-      const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
-      db.all(
-        `SELECT s.*, ro.order_code, ro.patient_name, ro.study_type
-         FROM schedules s
-         JOIN radiology_orders ro ON s.order_id = ro.id
-         ${where}
-         ORDER BY s.scheduled_at ASC`,
-        params,
-        (err, rows) => (err ? reject(err) : resolve(rows))
-      );
-    });
-  }
-
-  /** Actualiza el estado de una programación. */
-  updateStatus(id, status) {
-    return new Promise((resolve, reject) => {
-      const db = getDb();
-      db.run(`UPDATE schedules SET status = ? WHERE id = ?`, [status, id],
-        (err) => (err ? reject(err) : resolve()));
+      let query = `SELECT s.*, ro.order_code, ro.patient_name 
+                   FROM schedules s 
+                   JOIN radiology_orders ro ON s.order_id = ro.id`;
+      let params = [];
+      if (room || date) {
+        query += " WHERE ";
+        let conds = [];
+        if (room) { conds.push("s.room = ?"); params.push(room); }
+        if (date) { conds.push("date(s.scheduled_at) = ?"); params.push(date); }
+        query += conds.join(" AND ");
+      }
+      db.all(query, params, (err, rows) => (err ? reject(err) : resolve(rows)));
     });
   }
 }

@@ -55,8 +55,8 @@ app.use(errorHandler);
 
 // ── Iniciar servidor ──────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`[HIS] Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[HIS] Servidor corriendo en http://0.0.0.0:${PORT}`);
 });
 
 module.exports = app;
