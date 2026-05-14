@@ -8,7 +8,7 @@ SIGSALUD es una plataforma académica y demostrativa para simular la integració
 
 El proyecto también incluye un servicio central de autenticación llamado **Auth/Login**, encargado de validar usuarios, roles, permisos y redirigir al sistema correspondiente.
 
-Esta versión es una **beta funcional**, orientada a pruebas académicas, validación de arquitectura, integración API REST y simulación de flujos clínicos. No debe usarse en producción sin ajustes de seguridad, auditoría, cifrado, hardening, pruebas y validación normativa.
+Esta versión es una **beta funcional**, orientada a pruebas académicas, validación de arquitectura, integración API REST y simulación de flujos clínicos.
 
 ---
 
