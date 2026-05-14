@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <form class="d-flex gap-2 mb-3"><input class="form-control" name="search"
+                                    value="<%= search %>" placeholder="Buscar paciente o documento"><button
+                                    class="btn btn-primary">Buscar</button></form>
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Historia</th>
+                                            <th>Paciente</th>
+                                            <th>Documento</th>
+                                            <th>Estado</th>
+                                            <th>Órdenes</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% historias.forEach(h=>{ %><tr>
+                                                <td>
+                                                    <%= h.numero_historia %>
+                                                </td>
+                                                <td>
+                                                    <%= h.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= h.numero_documento %>
+                                                </td>
+                                                <td>
+                                                    <%= h.estado %>
+                                                </td>
+                                                <td>
+                                                    <%= h.ordenes %>
+                                                </td>
+                                                <td class="text-end"><a class="btn btn-sm btn-primary"
+                                                        href="/historias/paciente/<%= h.paciente_id %>">Abrir
+                                                        historia</a></td>
+                                            </tr>
+                                            <% }) %>
+                                                <% if(!historias.length){ %>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center text-muted py-4">No hay
+                                                            historias clínicas.</td>
+                                                    </tr>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

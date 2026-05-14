@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <% if(error){ %>
+                                <div class="alert alert-danger">
+                                    <%= error %>
+                                </div>
+                                <% } %>
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-body p-4">
+                                            <h4 class="fw-bold">Validación de informe radiológico</h4>
+                                            <p class="text-muted">Paciente: <%= informe.paciente %> · Documento: <%=
+                                                        informe.numero_documento %> · Orden: <%=
+                                                            informe.numero_orden_his %>
+                                            </p>
+                                            <div class="row g-3">
+                                                <div class="col-12"><strong>Estudio</strong>
+                                                    <p>
+                                                        <%= informe.descripcion %> · CUPS <%= informe.codigo_cups || ''
+                                                                %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12"><strong>Pregunta clínica</strong>
+                                                    <p>
+                                                        <%= informe.pregunta_clinica || 'No registra' %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12"><strong>Técnica usada</strong>
+                                                    <p>
+                                                        <%= informe.tecnica_usada || 'No registra' %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12"><strong>Hallazgos</strong>
+                                                    <p>
+                                                        <%= informe.hallazgos %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12"><strong>Conclusiones</strong>
+                                                    <p>
+                                                        <%= informe.conclusion %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <form method="POST" action="/informes/<%= informe.id %>/validar-enviar"
+                                                class="text-end"><button class="btn btn-success btn-lg">Firmar, dejar
+                                                    definitivo y enviar al HIS</button></form>
+                                        </div>
+                                    </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="text-end mb-3"><a href="/citas/crear" class="btn btn-success">Nueva cita</a>
+                            </div>
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Paciente</th>
+                                            <th>Especialidad</th>
+                                            <th>Estado</th>
+                                            <th>Motivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% citas.forEach(c=>{ %><tr>
+                                                <td>
+                                                    <%= new Date(c.fecha_hora).toLocaleString('es-CO') %>
+                                                </td>
+                                                <td>
+                                                    <%= c.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= c.especialidad||'' %>
+                                                </td>
+                                                <td><span class="badge bg-primary">
+                                                        <%= c.estado %>
+                                                    </span></td>
+                                                <td>
+                                                    <%= c.motivo||'' %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

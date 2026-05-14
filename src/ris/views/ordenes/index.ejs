@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Orden HIS</th>
+                                            <th>Paciente</th>
+                                            <th>Documento</th>
+                                            <th>Prioridad</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% ordenes.forEach(o=>{ %><tr>
+                                                <td>
+                                                    <%= o.numero_orden_his %>
+                                                </td>
+                                                <td>
+                                                    <%= o.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= o.numero_documento %>
+                                                </td>
+                                                <td>
+                                                    <%= o.prioridad %>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(o.created_at).toLocaleString('es-CO') %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body">
+                                    <h4>Informe radiológico</h4>
+                                    <p class="text-muted">Paciente: <%= estudio.paciente %> · Documento: <%=
+                                                estudio.numero_documento %> · Orden: <%= estudio.numero_orden_his %>
+                                    </p>
+                                    <p><strong>Estudio:</strong>
+                                        <%= estudio.descripcion %> · <strong>Modalidad:</strong>
+                                            <%= estudio.modalidad || 'No registra' %>
+                                    </p>
+                                    <form method="POST" action="/informes/estudio/<%= estudio.id %>" class="row g-3">
+                                        <div class="col-12"><label class="form-label">Pregunta clínica</label><textarea
+                                                name="pregunta_clinica" class="form-control" rows="2"
+                                                placeholder="Motivo clínico o pregunta diagnóstica"></textarea></div>
+                                        <div class="col-12"><label class="form-label">Técnica usada</label><textarea
+                                                name="tecnica_usada" class="form-control" rows="2"
+                                                placeholder="Proyección, contraste, protocolo o técnica utilizada"></textarea>
+                                        </div>
+                                        <div class="col-12"><label class="form-label">Hallazgos</label><textarea
+                                                name="hallazgos" class="form-control" rows="6" required></textarea>
+                                        </div>
+                                        <div class="col-12"><label class="form-label">Conclusiones</label><textarea
+                                                name="conclusion" class="form-control" rows="3" required></textarea>
+                                        </div>
+                                        <div class="col-md-6"><label class="form-label">Agregar otro estudio
+                                                relacionado</label><select name="estudio_relacionado_id"
+                                                class="form-select">
+                                                <option value="">Sin estudio relacionado</option>
+                                                <% relacionados.forEach(r=>{ %><option value="<%= r.id %>">
+                                                        <%= r.numero_orden_his %> - <%= r.descripcion %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select></div>
+                                        <div class="col-12 text-end"><button class="btn btn-primary">Guardar
+                                                informe</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

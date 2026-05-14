@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="text-end mb-3"><a href="/ordenes/crear" class="btn btn-success">Nueva orden</a>
+                            </div>
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Orden</th>
+                                            <th>Paciente</th>
+                                            <th>Tipo</th>
+                                            <th>Destino</th>
+                                            <th>Prioridad</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% ordenes.forEach(o=>{ %><tr>
+                                                <td>
+                                                    <%= o.numero_orden %>
+                                                </td>
+                                                <td>
+                                                    <%= o.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= o.tipo_orden %>
+                                                </td>
+                                                <td><span class="badge bg-info">
+                                                        <%= o.sistema_destino %>
+                                                    </span></td>
+                                                <td>
+                                                    <%= o.prioridad %>
+                                                </td>
+                                                <td>
+                                                    <%= o.estado %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

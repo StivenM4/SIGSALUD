@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es"><%- include('partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('partials/sidebar') %>
+                <main class="app-main"><%- include('partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body p-5 text-center">
+                                    <h1>
+                                        <%= message %>
+                                    </h1>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('partials/scripts') %>
+    </body>
+
+</html>

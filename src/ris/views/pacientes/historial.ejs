@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                                <div class="card-body">
+                                    <h4>
+                                        <%= paciente.primer_nombre %>
+                                            <%= paciente.primer_apellido %>
+                                    </h4>
+                                    <p class="text-muted">Documento: <%= paciente.numero_documento %> · Historial
+                                            radiológico</p>
+                                </div>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Estudios</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>Orden</th>
+                                                    <th>Estudio</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% estudios.forEach(e=>{ %><tr>
+                                                        <td><span class="badge bg-dark">
+                                                                <%= e.letra_estado %>
+                                                            </span>
+                                                            <%= e.estado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= e.numero_orden_his %>
+                                                        </td>
+                                                        <td>
+                                                            <%= e.descripcion %>
+                                                        </td>
+                                                        <td><a class="btn btn-sm btn-outline-primary"
+                                                                href="/estudios/<%= e.id %>">Ver</a></td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Informes</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Orden</th>
+                                                    <th>Conclusión</th>
+                                                    <th>Estado</th>
+                                                    <th>HIS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% informes.forEach(i=>{ %><tr>
+                                                        <td>
+                                                            <%= i.numero_orden_his %>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.conclusion %>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.estado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.enviado_his?'Enviado':'Pendiente' %>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

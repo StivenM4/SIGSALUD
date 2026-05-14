@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body">
+                                    <form method="POST" action="/citas" class="row g-3">
+                                        <div class="col-md-6"><label class="form-label">Paciente</label><select
+                                                name="paciente_id" class="form-select">
+                                                <% pacientes.forEach(p=>{ %><option value="<%= p.id %>">
+                                                        <%= p.numero_documento %> - <%= p.nombre_completo %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select></div>
+                                        <div class="col-md-3"><label class="form-label">Especialidad</label><select
+                                                name="especialidad_id" class="form-select">
+                                                <% especialidades.forEach(e=>{ %><option value="<%= e.id %>">
+                                                        <%= e.nombre %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select></div>
+                                        <div class="col-md-3"><label class="form-label">Estado</label><select
+                                                name="estado_id" class="form-select">
+                                                <% estados.forEach(e=>{ %><option value="<%= e.id %>">
+                                                        <%= e.nombre %>
+                                                    </option>
+                                                    <% }) %>
+                                            </select></div>
+                                        <div class="col-md-4"><label class="form-label">Fecha</label><input
+                                                type="datetime-local" name="fecha_hora" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-8"><label class="form-label">Motivo</label><input
+                                                name="motivo" class="form-control"></div>
+                                        <div class="col-12 text-end"><button class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

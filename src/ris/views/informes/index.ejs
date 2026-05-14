@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="alert alert-info">Vista para médicos/radiólogos: crear, guardar, firmar y enviar
+                                informes al HIS.</div>
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Estudios listos para informe</div>
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>Paciente</th>
+                                                    <th>Estudio</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% pendientes.forEach(e=>{ %><tr>
+                                                        <td><span class="badge bg-dark">
+                                                                <%= e.letra_estado %>
+                                                            </span>
+                                                            <%= e.estado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= e.paciente %><br><small>
+                                                                    <%= e.numero_documento %>
+                                                                </small>
+                                                        </td>
+                                                        <td>
+                                                            <%= e.descripcion %>
+                                                        </td>
+                                                        <td><a class="btn btn-sm btn-success"
+                                                                href="/informes/estudio/<%= e.id %>">Crear informe</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Informes guardados</div>
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Paciente</th>
+                                                    <th>Estudio</th>
+                                                    <th>Estado</th>
+                                                    <th>HIS</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% informes.forEach(i=>{ %><tr>
+                                                        <td>
+                                                            <%= i.paciente %>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.descripcion %><br><small>
+                                                                    <%= i.numero_orden_his %>
+                                                                </small>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.estado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= i.enviado_his?'Enviado':'Pendiente' %>
+                                                        </td>
+                                                        <td><a class="btn btn-sm btn-primary"
+                                                                href="/informes/<%= i.id %>/validar">Validar</a></td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

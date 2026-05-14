@@ -1,0 +1,10 @@
+const express = require("express");
+const c = require("../controllers/resultadoController");
+const p = require("../middlewares/requirePermission");
+const r = express.Router();
+r.get("/", p("HIS_RESULTS"), c.index);
+r.get("/lis", p("HIS_VIEW_LIS_RESULTS"), c.lis);
+r.get("/ris", p("HIS_VIEW_RIS_RESULTS"), c.ris);
+r.post("/orden/:ordenId/sincronizar", p("HIS_RESULTS"), c.sync);
+r.get("/:id", p("HIS_RESULTS"), c.show);
+module.exports = r;

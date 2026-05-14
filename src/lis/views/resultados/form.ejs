@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body">
+                                    <h4>Registrar resultados - <%= order.numero_orden_his %>
+                                    </h4>
+                                    <form method="POST" action="/resultados/<%= order.id %>" class="row g-3">
+                                        <% details.forEach(d=>{ %><div class="col-md-6"><label class="form-label">
+                                                    <%= d.nombre %> <small class="text-muted">
+                                                            <%= d.valor_referencia||'' %>
+                                                        </small>
+                                                </label><input name="resultado_<%= d.prueba_id %>" class="form-control"
+                                                    required></div>
+                                            <% }) %>
+                                                <div class="col-12 text-end"><button class="btn btn-primary">Guardar
+                                                        resultados</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

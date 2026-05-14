@@ -1,0 +1,38 @@
+{
+  "name": "sigsalud-integrado-api-rest",
+  "version": "1.0.0",
+  "description": "SIGSALUD: Login central + HIS + LIS + RIS integrados por API REST, PostgreSQL, JWT, EJS y Bootstrap 5.",
+  "main": "src/auth/app.js",
+  "scripts": {
+    "auth": "nodemon src/auth/app.js",
+    "his": "nodemon src/his/app.js",
+    "lis": "nodemon src/lis/app.js",
+    "ris": "nodemon src/ris/app.js",
+    "dev": "concurrently \"npm run auth\" \"npm run his\" \"npm run lis\" \"npm run ris\"",
+    "start:auth": "node src/auth/app.js",
+    "start:his": "node src/his/app.js",
+    "start:lis": "node src/lis/app.js",
+    "start:ris": "node src/ris/app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.8.3",
+    "prettier-plugin-ejs": "^1.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

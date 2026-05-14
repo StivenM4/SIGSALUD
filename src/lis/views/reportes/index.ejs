@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Orden</th>
+                                            <th>Paciente</th>
+                                            <th>Documento</th>
+                                            <th>URL</th>
+                                            <th>Fecha</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% reportes.forEach(r=>{ %><tr>
+                                                <td>
+                                                    <%= r.numero_orden_his %>
+                                                </td>
+                                                <td>
+                                                    <%= r.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= r.numero_documento %>
+                                                </td>
+                                                <td>
+                                                    <%= r.url_documento || '' %>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(r.created_at).toLocaleString('es-CO') %>
+                                                </td>
+                                                <td class="text-end"><a class="btn btn-sm btn-outline-primary"
+                                                        href="/reportes/<%= r.orden_id %>">Ver reporte</a></td>
+                                            </tr>
+                                            <% }) %>
+                                                <% if(!reportes.length){ %>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center text-muted py-4">No hay
+                                                            reportes generados.</td>
+                                                    </tr>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

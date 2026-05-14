@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Orden</th>
+                                            <th>Paciente</th>
+                                            <th>Estado</th>
+                                            <th>Resultados</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% ordenes.forEach(o=>{ %><tr>
+                                                <td>
+                                                    <%= o.numero_orden_his %>
+                                                </td>
+                                                <td>
+                                                    <%= o.paciente %><br><small>
+                                                            <%= o.numero_documento %>
+                                                        </small>
+                                                </td>
+                                                <td>
+                                                    <%= o.estado %>
+                                                </td>
+                                                <td>
+                                                    <%= o.total_resultados %>
+                                                </td>
+                                                <td class="text-end"><a class="btn btn-sm btn-primary"
+                                                        href="/resultados/<%= o.id %>">Registrar / editar</a></td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

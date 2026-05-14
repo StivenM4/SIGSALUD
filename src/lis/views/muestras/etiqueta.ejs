@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4 mx-auto" style="max-width:520px">
+                                <div class="card-body text-center">
+                                    <h4>Etiqueta de muestra</h4>
+                                    <p>Código generado:</p>
+                                    <div class="barcode">|||| <%= sample.codigo_muestra %> ||||</div>
+                                    <p class="text-muted mt-3">Formato compatible para representar CODE128 en
+                                        impresora/etiquetadora.</p><a href="/muestras" class="btn btn-primary">Ver
+                                        muestras</a>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

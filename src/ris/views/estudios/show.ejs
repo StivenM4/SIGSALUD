@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="row g-4">
+                                <div class="col-lg-7">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-body">
+                                            <h4>
+                                                <%= estudio.descripcion %>
+                                            </h4>
+                                            <p class="text-muted">Paciente: <%= estudio.paciente %> · Orden: <%=
+                                                        estudio.numero_orden_his %>
+                                            </p>
+                                            <p>Estado: <strong>
+                                                    <%= estudio.estado %>
+                                                </strong></p>
+                                            <form method="POST" action="/estudios/<%= estudio.id %>/ejecutar"
+                                                class="mb-3"><button class="btn btn-warning">Marcar ejecución
+                                                    técnica</button></form><a href="/informes/estudio/<%= estudio.id %>"
+                                                class="btn btn-success">Crear informe</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-body">
+                                            <h5>Referencia PACS / Orthanc</h5>
+                                            <form method="POST" action="/estudios/<%= estudio.id %>/pacs"
+                                                class="d-flex gap-2"><input name="orthanc_study_id" class="form-control"
+                                                    placeholder="Orthanc Study UUID"><button
+                                                    class="btn btn-primary">Vincular</button></form>
+                                            <hr>
+                                            <% pacs.forEach(p=>{ %><div class="alert alert-dark"><strong>
+                                                        <%= p.orthanc_study_id %>
+                                                    </strong><br><a href="<%= p.url_visualizacion %>"
+                                                        target="_blank">Abrir en Orthanc</a></div>
+                                                <% }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

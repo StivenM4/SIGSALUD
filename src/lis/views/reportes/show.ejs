@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body">
+                                    <h3>Reporte de laboratorio</h3>
+                                    <p>Orden: <%= order.numero_orden_his %>
+                                    </p>
+                                    <p>Paciente: <%= order.paciente %>
+                                    </p>
+                                    <ul>
+                                        <% details.forEach(d=>{ %><li>
+                                                <%= d.nombre %> - <%= d.valor_referencia||'' %>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

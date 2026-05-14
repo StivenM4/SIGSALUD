@@ -1,0 +1,13 @@
+<aside class="app-sidebar">
+    <div class="brand">
+        <div class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+        <div><strong>SIGSALUD</strong><small>LIS</small></div>
+    </div>
+    <nav class="menu">
+        <% menu.forEach(function(item){ %><a href="<%= item.ruta %>"><i
+                    class="bi <%= item.icono_bootstrap %>"></i><span>
+                    <%= item.texto %>
+                </span></a>
+            <% }) %>
+    </nav>
+</aside>

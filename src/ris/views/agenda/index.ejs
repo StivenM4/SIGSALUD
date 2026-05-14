@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="d-flex justify-content-end mb-3"><a class="btn btn-success"
+                                    href="/agenda/crear">Programar estudio</a></div>
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Paciente</th>
+                                            <th>Estudio</th>
+                                            <th>Sala</th>
+                                            <th>Equipo</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% agenda.forEach(a=>{ %><tr>
+                                                <td>
+                                                    <%= a.fecha_hora ? new Date(a.fecha_hora).toLocaleString('es-CO')
+                                                        : 'Sin fecha' %>
+                                                </td>
+                                                <td>
+                                                    <%= a.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= a.descripcion %><br><small>
+                                                            <%= a.numero_orden_his %>
+                                                        </small>
+                                                </td>
+                                                <td>
+                                                    <%= a.sala || 'Sin sala' %>
+                                                </td>
+                                                <td>
+                                                    <%= a.equipo || '' %>
+                                                </td>
+                                                <td>
+                                                    <%= a.estado %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                                <% if(!agenda.length){ %>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center text-muted py-4">No hay
+                                                            agenda radiológica.</td>
+                                                    </tr>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

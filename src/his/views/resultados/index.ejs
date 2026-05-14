@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h4 class="fw-bold mb-0">
+                                        <%= title %>
+                                    </h4><small class="text-muted">Origen: <%= origen %>. Copia clínica guardada en HIS
+                                            desde LIS/RIS.</small>
+                                </div>
+                                <div class="btn-group"><a class="btn btn-outline-primary" href="/resultados">Todos</a><a
+                                        class="btn btn-outline-success" href="/resultados/lis">LIS</a><a
+                                        class="btn btn-outline-info" href="/resultados/ris">RIS</a></div>
+                            </div>
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Origen</th>
+                                                <th>Orden</th>
+                                                <th>Paciente</th>
+                                                <th>Tipo</th>
+                                                <th>Resumen</th>
+                                                <th>Recibido</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% resultados.forEach(r=>{ %><tr>
+                                                    <td><span
+                                                            class="badge <%= r.sistema_origen==='LIS'?'bg-success':'bg-info' %>">
+                                                            <%= r.sistema_origen %>
+                                                        </span></td>
+                                                    <td>
+                                                        <%= r.numero_orden %>
+                                                    </td>
+                                                    <td>
+                                                        <%= r.paciente %><br><small class="text-muted">
+                                                                <%= r.numero_documento %>
+                                                            </small>
+                                                    </td>
+                                                    <td>
+                                                        <%= r.tipo_resultado %>
+                                                    </td>
+                                                    <td>
+                                                        <%= r.resumen || 'Sin resumen' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= new Date(r.recibido_at).toLocaleString('es-CO') %>
+                                                    </td>
+                                                    <td class="text-end"><a class="btn btn-sm btn-primary"
+                                                            href="/resultados/<%= r.id %>">Ver</a>
+                                                        <form class="d-inline" method="POST"
+                                                            action="/resultados/orden/<%= r.orden_id %>/sincronizar">
+                                                            <button class="btn btn-sm btn-outline-secondary">Actualizar
+                                                                origen</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% if(!resultados.length){ %>
+                                                        <tr>
+                                                            <td colspan="7" class="text-center text-muted py-4">No hay
+                                                                resultados registrados en HIS.</td>
+                                                        </tr>
+                                                        <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

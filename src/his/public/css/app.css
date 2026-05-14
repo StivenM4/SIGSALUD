@@ -1,0 +1,128 @@
+body {
+  background: #f4f7fb;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+.app-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+}
+.app-sidebar {
+  background: #0b2f6b;
+  color: #fff;
+  padding: 1.4rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #0d6efd;
+  font-size: 1.5rem;
+}
+.brand small {
+  display: block;
+  color: #a9c7ff;
+}
+.menu {
+  display: grid;
+  gap: 0.35rem;
+}
+.menu a {
+  color: #dbe8ff;
+  text-decoration: none;
+  padding: 0.8rem 0.9rem;
+  border-radius: 12px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.app-main {
+  min-width: 0;
+}
+.app-navbar {
+  height: 76px;
+  background: #fff;
+  border-bottom: 1px solid #e8edf5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.6rem;
+}
+.stat-card {
+  border-radius: 18px;
+}
+.stat-card .card-body {
+  position: relative;
+  min-height: 115px;
+}
+.stat-card span {
+  color: #6c7a91;
+  font-weight: 600;
+}
+.stat-card h3 {
+  font-weight: 800;
+  margin-top: 0.5rem;
+}
+.stat-card i {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 2.3rem;
+  color: #0d6efd;
+  opacity: 0.18;
+}
+.mini-card {
+  background: #f8fbff;
+  border: 1px solid #e4ecf7;
+  border-radius: 16px;
+  padding: 1rem;
+}
+.procedure-box {
+  border: 1px solid #dee6f2;
+  border-radius: 14px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.6rem;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.dark-viewer {
+  background: #111827;
+  color: #e5e7eb;
+  border-radius: 18px;
+  min-height: 520px;
+  padding: 1.5rem;
+}
+.viewer-thumb {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.barcode {
+  font-family: monospace;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  background: #fff;
+  border: 1px dashed #111;
+  padding: 0.5rem;
+  text-align: center;
+}

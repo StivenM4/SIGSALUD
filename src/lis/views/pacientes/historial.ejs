@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                                <div class="card-body">
+                                    <h4>
+                                        <%= paciente.primer_nombre %>
+                                            <%= paciente.primer_apellido %>
+                                    </h4>
+                                    <p class="text-muted">Documento: <%= paciente.numero_documento %> · Historial de
+                                            laboratorio</p>
+                                </div>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-lg-5">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Órdenes</div>
+                                        <table class="table mb-0">
+                                            <tbody>
+                                                <% ordenes.forEach(o=>{ %><tr>
+                                                        <td>
+                                                            <%= o.numero_orden_his %><br><small>
+                                                                    <%= o.estado %>
+                                                                </small>
+                                                        </td>
+                                                        <td><a class="btn btn-sm btn-outline-primary"
+                                                                href="/ordenes/<%= o.id %>">Ver</a></td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Resultados</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Orden</th>
+                                                    <th>Prueba</th>
+                                                    <th>Resultado</th>
+                                                    <th>Validado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% resultados.forEach(r=>{ %><tr>
+                                                        <td>
+                                                            <%= r.numero_orden_his %>
+                                                        </td>
+                                                        <td>
+                                                            <%= r.codigo_cups %> - <%= r.prueba %>
+                                                        </td>
+                                                        <td>
+                                                            <%= r.resultado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= r.validado?'Sí':'No' %>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-1">
+                                        <%= paciente.primer_nombre %>
+                                            <%= paciente.segundo_nombre || '' %>
+                                                <%= paciente.primer_apellido %>
+                                                    <%= paciente.segundo_apellido || '' %>
+                                    </h4>
+                                    <p class="text-muted mb-0">HC <%= paciente.numero_historia %> · <%=
+                                                paciente.tipo_documento %>
+                                                <%= paciente.numero_documento %> · <%= paciente.genero %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Órdenes diagnósticas</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Orden</th>
+                                                    <th>Prestación</th>
+                                                    <th>Estado</th>
+                                                    <th>Resultados</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% ordenes.forEach(o=>{ %><tr>
+                                                        <td>
+                                                            <%= o.numero_orden %>
+                                                        </td>
+                                                        <td>
+                                                            <%= o.sistema_destino==='LIS' ?'Laboratorio':'Radiología' %>
+                                                        </td>
+                                                        <td>
+                                                            <%= o.estado %>
+                                                        </td>
+                                                        <td>
+                                                            <%= o.total_resultados %>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4">
+                                        <div class="card-header bg-white fw-bold">Antecedentes</div>
+                                        <div class="card-body">
+                                            <% antecedentes.forEach(a=>{ %><div class="mb-2"><strong>
+                                                        <%= a.tipo %>
+                                                    </strong>
+                                                    <p class="mb-0">
+                                                        <%= a.descripcion %>
+                                                    </p>
+                                                </div>
+                                                <% }) %>
+                                                    <% if(!antecedentes.length){ %>
+                                                        <p class="text-muted">Sin antecedentes registrados.</p>
+                                                        <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 shadow-sm rounded-4 mt-4">
+                                <div class="card-header bg-white fw-bold">Resultados e informes anexados desde LIS/RIS
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Origen</th>
+                                                <th>Tipo</th>
+                                                <th>Resumen</th>
+                                                <th>Validado por</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% resultados.forEach(r=>{ %><tr>
+                                                    <td><span
+                                                            class="badge <%= r.sistema_origen==='LIS'?'bg-success':'bg-info' %>">
+                                                            <%= r.sistema_origen %>
+                                                        </span></td>
+                                                    <td>
+                                                        <%= r.tipo_resultado %>
+                                                    </td>
+                                                    <td>
+                                                        <%= r.resumen %>
+                                                    </td>
+                                                    <td>
+                                                        <%= r.validado_por || '' %>
+                                                    </td>
+                                                    <td class="text-end"><a class="btn btn-sm btn-outline-primary"
+                                                            href="/resultados/<%= r.id %>">Ver</a></td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% if(!resultados.length){ %>
+                                                        <tr>
+                                                            <td colspan="5" class="text-center text-muted py-4">Aún no
+                                                                hay resultados anexados.</td>
+                                                        </tr>
+                                                        <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

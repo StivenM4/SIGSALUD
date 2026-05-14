@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Orden</th>
+                                            <th>Paciente</th>
+                                            <th>Prioridad</th>
+                                            <th>Enviado HIS</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% ordenes.forEach(o=>{ %><tr>
+                                                <td>
+                                                    <%= o.numero_orden_his %>
+                                                </td>
+                                                <td>
+                                                    <%= o.paciente %>
+                                                </td>
+                                                <td>
+                                                    <%= o.prioridad %>
+                                                </td>
+                                                <td>
+                                                    <%= o.enviado_his?'Sí':'No' %>
+                                                </td>
+                                                <td class="text-end"><a href="/validaciones/<%= o.id %>"
+                                                        class="btn btn-sm btn-primary">Ver detalle</a></td>
+                                            </tr>
+                                            <% }) %>
+                                                <% if(!ordenes.length){ %>
+                                                    <tr>
+                                                        <td colspan="5" class="text-center text-muted py-4">No hay
+                                                            órdenes listas para validación.</td>
+                                                    </tr>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

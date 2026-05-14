@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card-body p-4">
+                                    <% if(error){ %>
+                                        <div class="alert alert-danger">
+                                            <%= error %>
+                                        </div>
+                                        <% } %>
+                                            <form method="POST" action="/pacientes" class="row g-3">
+                                                <div class="col-md-3"><label class="form-label">Tipo
+                                                        documento</label><select name="tipo_documento_id"
+                                                        class="form-select">
+                                                        <% tiposDocumento.forEach(t=>{ %><option value="<%= t.id %>">
+                                                                <%= t.codigo %>
+                                                            </option>
+                                                            <% }) %>
+                                                    </select></div>
+                                                <div class="col-md-3"><label class="form-label">Documento</label><input
+                                                        name="numero_documento" class="form-control" required></div>
+                                                <div class="col-md-3"><label class="form-label">Primer
+                                                        nombre</label><input name="primer_nombre" class="form-control"
+                                                        required></div>
+                                                <div class="col-md-3"><label class="form-label">Segundo
+                                                        nombre</label><input name="segundo_nombre" class="form-control">
+                                                </div>
+                                                <div class="col-md-3"><label class="form-label">Primer
+                                                        apellido</label><input name="primer_apellido"
+                                                        class="form-control" required></div>
+                                                <div class="col-md-3"><label class="form-label">Segundo
+                                                        apellido</label><input name="segundo_apellido"
+                                                        class="form-control"></div>
+                                                <div class="col-md-3"><label class="form-label">Nacimiento</label><input
+                                                        type="date" name="fecha_nacimiento" class="form-control"
+                                                        required></div>
+                                                <div class="col-md-3"><label class="form-label">Género</label><select
+                                                        name="genero_id" class="form-select">
+                                                        <% generos.forEach(g=>{ %><option value="<%= g.id %>">
+                                                                <%= g.nombre %>
+                                                            </option>
+                                                            <% }) %>
+                                                    </select></div>
+                                                <div class="col-md-4"><label class="form-label">Teléfono</label><input
+                                                        name="telefono" class="form-control"></div>
+                                                <div class="col-md-4"><label class="form-label">Correo</label><input
+                                                        name="email" class="form-control"></div>
+                                                <div class="col-md-4"><label class="form-label">Dirección</label><input
+                                                        name="direccion" class="form-control"></div>
+                                                <div class="col-12 text-end"><button
+                                                        class="btn btn-primary">Guardar</button></div>
+                                            </form>
+                                </div>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>

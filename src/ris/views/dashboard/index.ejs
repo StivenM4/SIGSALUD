@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es"><%- include('../partials/head',{title}) %>
+
+    <body>
+        <div class="app-layout"><%- include('../partials/sidebar') %>
+                <main class="app-main"><%- include('../partials/navbar',{title}) %>
+                        <section class="container-fluid py-4">
+                            <div class="row g-3">
+                                <% [['Órdenes',stats.ordenes],['Estudios',stats.estudios],['Informes',stats.informes],['PACS',stats.pacs]].forEach(function(s){
+                                    %>
+                                    <div class="col-md-3">
+                                        <div class="card stat-card border-0 shadow-sm">
+                                            <div class="card-body"><span>
+                                                    <%= s[0] %>
+                                                </span>
+                                                <h3>
+                                                    <%= s[1] %>
+                                                </h3><i class="bi bi-badge-3d"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                        </section>
+                </main>
+        </div><%- include('../partials/scripts') %>
+    </body>
+
+</html>
