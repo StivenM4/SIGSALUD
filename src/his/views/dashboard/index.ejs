@@ -1,31 +1,44 @@
 <!doctype html>
-<html lang="es"><%- include('../partials/head',{title}) %>
+<html lang="es">
+<%- include('../partials/head', { title }) %>
 
   <body>
-    <div class="app-layout"><%- include('../partials/sidebar') %>
-        <main class="app-main"><%- include('../partials/navbar',{title}) %>
+    <div class="app-layout">
+      <%- include('../partials/sidebar') %>
+
+        <main class="app-main">
+          <%- include('../partials/navbar', { title }) %>
+
             <section class="container-fluid py-4">
               <div class="row g-3 mb-4">
-                <% [['Pacientes',stats.total_pacientes,'bi-people'],['Citas
-                  hoy',stats.citas_hoy,'bi-calendar'],['Órdenes',stats.total_ordenes,'bi-clipboard2-pulse'],['Notificaciones',stats.notificaciones,'bi-bell']].forEach(function(s){
-                  %>
-                  <div class="col-md-3">
-                    <div class="card stat-card border-0 shadow-sm">
-                      <div class="card-body"><span>
-                          <%= s[0] %>
-                        </span>
-                        <h3>
-                          <%= s[1] %>
-                        </h3><i class="bi <%= s[2] %>"></i>
+                <% const cards=[ ['Pacientes', stats.total_pacientes || 0, 'bi-people' ], ['Citas hoy', stats.citas_hoy
+                  || 0, 'bi-calendar' ], ['Órdenes', stats.total_ordenes || 0, 'bi-clipboard2-pulse' ],
+                  ['Notificaciones', stats.notificaciones || 0, 'bi-bell' ] ]; %>
+
+                  <% cards.forEach(function(s) { %>
+                    <div class="col-md-3">
+                      <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body">
+                          <span>
+                            <%= s[0] %>
+                          </span>
+                          <h3>
+                            <%= s[1] %>
+                          </h3>
+                          <i class="bi <%= s[2] %>"></i>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <% }) %>
+                    <% }) %>
               </div>
+
               <div class="row g-4">
                 <div class="col-lg-8">
                   <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-header bg-white fw-bold">Órdenes recientes</div>
+                    <div class="card-header bg-white fw-bold">
+                      Órdenes recientes
+                    </div>
+
                     <div class="table-responsive">
                       <table class="table table-hover mb-0">
                         <thead>
@@ -37,8 +50,9 @@
                             <th>Fecha</th>
                           </tr>
                         </thead>
+
                         <tbody>
-                          <% recentOrders.forEach(function(o){ %>
+                          <% recentOrders.forEach(function(o) { %>
                             <tr>
                               <td>
                                 <%= o.numero_orden %>
@@ -46,9 +60,11 @@
                               <td>
                                 <%= o.paciente %>
                               </td>
-                              <td><span class="badge bg-info">
+                              <td>
+                                <span class="badge bg-info">
                                   <%= o.sistema_destino %>
-                                </span></td>
+                                </span>
+                              </td>
                               <td>
                                 <%= o.estado %>
                               </td>
@@ -57,9 +73,12 @@
                               </td>
                             </tr>
                             <% }) %>
-                              <% if(!recentOrders.length){ %>
+
+                              <% if (!recentOrders.length) { %>
                                 <tr>
-                                  <td colspan="5" class="text-center text-muted py-4">Sin órdenes</td>
+                                  <td colspan="5" class="text-center text-muted py-4">
+                                    Sin órdenes
+                                  </td>
                                 </tr>
                                 <% } %>
                         </tbody>
@@ -67,18 +86,27 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="col-lg-4">
                   <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-header bg-white fw-bold">Notificaciones</div>
+                    <div class="card-header bg-white fw-bold">
+                      Notificaciones
+                    </div>
+
                     <div class="card-body">
-                      <% notifications.forEach(function(n){ %>
-                        <div class="alert alert-info py-2"><strong>
+                      <% notifications.forEach(function(n) { %>
+                        <div class="alert alert-info py-2">
+                          <strong>
                             <%= n.titulo %>
-                          </strong><br><small>
+                          </strong>
+                          <br>
+                          <small>
                             <%= n.mensaje %>
-                          </small></div>
+                          </small>
+                        </div>
                         <% }) %>
-                          <% if(!notifications.length){ %>
+
+                          <% if (!notifications.length) { %>
                             <p class="text-muted">Sin notificaciones</p>
                             <% } %>
                     </div>
@@ -87,7 +115,9 @@
               </div>
             </section>
         </main>
-    </div><%- include('../partials/scripts') %>
+    </div>
+
+    <%- include('../partials/scripts') %>
   </body>
 
 </html>
